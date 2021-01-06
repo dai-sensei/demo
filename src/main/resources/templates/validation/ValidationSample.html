@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="jp"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="main-content">
+    <div>
+        <h2>ページ遷移を伴うバリデーションチェック</h2>
+        <form method="post" th:action="@{/validation}" th:object="${form}">
+            <div>
+                Name:
+                <input type="text" th:field="*{name}" name="name"/>
+                <span  th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></span>
+            </div>
+            <div>
+                Age:
+                <input type="text" th:field="*{age}" name="age"/>
+                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red"></span>
+            </div>
+            <div>
+                Mail:
+                <input type="text" th:field="*{mail}" name="email"/>
+                <span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" style="color: red"></span>
+            </div>
+            <div>
+                PostAddress:
+                <input type="text" th:field="*{postAddress}" name="postAddress"/>
+                <span th:if="${#fields.hasErrors('postAddress')}" th:errors="*{postAddress}" style="color: red"></span>
+            </div>
+            <div>
+                <input type="submit" value="送信"/>
+            </div>
+        </form>
+    </div>
+    <div id="form-check">
+        <h2>非同期通信でのバリデーションチェック</h2>
+        <div id="validationMessage">{{resultMessage}}</div>
+        <form method="post" th:action="@{/validation}">
+            <div>
+                Name:
+                <input type="text" name="name" v-model="formData.name"/>
+            </div>
+            <div>
+                Age:
+                <input type="text" name="age" v-model="formData.age"/>
+            </div>
+            <div>
+                Mail:
+                <input type="text" name="email" v-model="formData.email"/>
+            </div>
+            <div>
+                PostAddress:
+                <input type="text" name="postAddress" v-model="formData.postAddress"/>
+            </div>
+        </form>
+        <button @click="validationCheck">送信</button>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/webjars/vue/2.6.10/dist/vue.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/axios/0.19.0/dist/axios.js}"></script>
+<script type="text/javascript" th:src="@{/js/validation/validation.js}"></script>
+</body>
+</html>

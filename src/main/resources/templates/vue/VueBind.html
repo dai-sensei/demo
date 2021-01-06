@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="jp"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Bindの確認</title>
+    <script type="text/javascript" th:src="@{/webjars/vue/2.6.10/dist/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/axios/0.19.0/dist/axios.js}"></script>
+</head>
+<body>
+    <div id="thymeleaf-content">
+        <h3>thymeleafによる描画</h3>
+        <ul id="thymeleaf-list">
+           <li  th:each="word : ${wordList}" th:text="${word}"></li>
+        </ul>
+    </div>
+    <div id="vue-content">
+        <h3>Vueによる描画</h3>
+        <ul id="list-view">
+            <word-item v-for="item in wordList"
+                       v-bind:word="item"
+                       v-bind:key="item"></word-item>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{/js/vue/ListView.js}"></script>
+</html>

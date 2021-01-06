@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="jp"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="main-content">
+    <div th:object="${formObject}">
+        <div>
+            Name:
+            <div th:text="*{name}" name="name"></div>
+        </div>
+        <div>
+            Age:
+            <div th:text="*{age}" name="age"></div>
+        </div>
+        <div>
+            Mail:
+            <div th:text="*{mail}" name="mail"></div>
+        </div>
+        <div>
+            PostAddress:
+            <div th:text="*{postAddress}" name="postAddress"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="jp"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script type="text/javascript" th:src="@{/webjars/vue/2.6.10/dist/vue.js}"></script>
+</head>
+<body>
+    <div id="main-content">
+        <div>
+            <h1 id="page-title">複雑な情報の出力</h1>
+        </div>
+        <form id="input-form" method="post" action="#" th:action="@{/shop/add}">
+            <div name="shopName">店名: {{formData.shop.shopName}}</div>
+            <input type="hidden" name="shop.shopName" v-bind:value="formData.shop.shopName"/>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>index</th>
+                        <th>商品番号</th>
+                        <th>商品名</th>
+                        <th>価格</th>
+                        <th>在庫数</th>
+                    </tr>
+                </thead>
+                <!-- 注目ポイント  -->
+                <!-- 子要素で発火したイベント(child-delete)を親のイベント（detaDelete）に伝搬する -->
+                <tbody is="item-col" v-for="(item,index) in formData.itemList"
+                       v-bind:item="item"
+                       v-bind:index="index"
+                       v-bind:key="item.itemNumber"
+                       v-on:child-delete="dataDelete">
+                </tbody>
+            </table>
+            <div>
+                <input id="add" type="button" value="最後尾に1行追加" @click="add"/>
+            </div>
+            <input type="submit" value="送信" />
+        </form>
+        <!--  読み取り用のJSON埋め込み箇所  -->
+        <div id="json-data" th:text="${shopData}" hidden></div>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{/js/sample/sample.js}"></script>
+</html>

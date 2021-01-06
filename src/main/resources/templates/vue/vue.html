@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="jp"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js Test</title>
+    <script type="text/javascript" th:src="@{/webjars/vue/2.6.10/dist/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/axios/0.19.0/dist/axios.js}"></script>
+</head>
+<body>
+    <!-- thymeleaf記述 -->
+    <h1 th:text="${title}"></h1>
+
+    <!-- vue.js -->
+    <h2>データバインド</h2>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <h2>属性のバインド</h2>
+    <div id="app2">
+        <span v-bind="{title:message}"></span>
+    </div>
+
+    <h2>条件分岐</h2>
+    <div id="app3">
+        <span v-if="seen">Now you see me</span>
+    </div>
+
+    <h2>要素の内容をすべて表示</h2>
+    <div id="app4">
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+
+    <h2>イベント発火</h2>
+    <h4>公式の書き方</h4>
+    <div id="app5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+    <h4>IDEで警告が出ない書き方</h4>
+    <div id="app5-1">
+        <p>{{message}}</p>
+        <button v-on="{click:reverseMessage}">Reverse Message</button>
+    </div>
+
+    <h2>双方向バインド</h2>
+    <div id="app6">
+        <p>{{message}}</p>
+        <input v-model="message"/>
+    </div>
+
+    <h2>コンポーネント</h2>
+    <div id="app7">
+        <ol>
+            <todo-item v-for="item in groceryList"
+                       v-bind:todo="item"
+                       v-bind:key="item.id"></todo-item>
+        </ol>
+    </div>
+
+    <h2>算出プロパティ</h2>
+    <div id="example">
+        <p>Original message: "{{message}}"</p>
+        <p>Computed reversed message: "{{reversedMessage}}"</p>
+    </div>
+
+    <h2>HTMLクラスのバインディング</h2>
+    <div class="static" v-bind:class="{active: isActive, 'text-danger': hasError}"></div>
+
+    <h2>条件分岐（v-if,v-else）</h2>
+    <div id="app8">
+        <h1 v-if="awesome">Vue is awesome! awesome="{{awesome}}"</h1>
+        <h1 v-else>Oh no 😢 awesome="{{awesome}}"</h1>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{/js/vue/hellovue.js}"></script>
+</html>
